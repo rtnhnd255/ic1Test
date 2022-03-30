@@ -9,31 +9,50 @@ import (
 )
 
 type Server struct {
-	Cfg    config.Config
-	DB     *db.Db
-	Parser *parser.Parser
+	config config.Config
+	db     *db.Db
+	parser *parser.Parser
+	port   string
 }
 
-func NewServer(cfgPath string) (*Server, error) {
+func NewServer(cfgPath string, port string) (*Server, error) {
 	cfg, err := config.ParseConfig(cfgPath)
 	if err != nil {
 		return nil, err
 	}
 	return &Server{
-		Cfg:    *cfg,
-		DB:     db.NewDBConn(cfg),
-		Parser: parser.NewParser(),
+		config: *cfg,
+		db:     db.NewDBConn(cfg),
+		parser: parser.NewParser(),
+		port:   port,
 	}, nil
 }
 
-func (s *Server) RunServer(port string) error {
+func (s *Server) RunServer() error {
 	log.Println("Starting server")
-	ln, err := net.Listen("tcp", ":"+port)
+	ln, err := net.Listen("tcp", ":"+s.port)
 	if err != nil {
 		return err
 	}
-	conn, err := ln.Accept()
+
+	for {
+		conn, err := ln.Accept()
+		if err != nil {
+			return err
+		}
+		s.handleMessage(conn)
+	}
+}
+
+//TODO: specify package size
+
+func (s *Server) handleMessage(conn net.Conn) {
+	buf := make([]byte, 1024)
+	_, err := conn.Read(buf)
+
+	msg := s.parser.ParseMsg(buf)
+	err = s.db.CreateRecord(msg)
 	if err != nil {
-		return err
+		log.Println(err)
 	}
 }

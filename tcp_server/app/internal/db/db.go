@@ -8,6 +8,8 @@ import (
 	"github.com/jackc/pgx"
 )
 
+//TODO: write migrations and method like "CHECK DOES IT EXIST AND IF ITS NOT CREATE IT YOOOO"
+
 type Db struct {
 	Config     pgx.ConnConfig
 	Connection *pgx.Conn
