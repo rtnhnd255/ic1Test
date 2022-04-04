@@ -2,8 +2,9 @@ package main
 
 import (
 	"flag"
+	"github.com/rtnhnd255/ic1Test/app/internal/server"
 	"log"
-	"tcp_server/app/internal/server"
+
 )
 
 func main() {

@@ -2,8 +2,9 @@ package db
 
 import (
 	"log"
-	"tcp_server/app/internal/config"
-	"tcp_server/app/internal/model"
+
+	"github.com/rtnhnd255/ic1Test/app/internal/config"
+	"github.com/rtnhnd255/ic1Test/app/internal/model"
 
 	"github.com/jackc/pgx"
 )

@@ -3,12 +3,13 @@ package server
 import (
 	"encoding/binary"
 	"fmt"
+	"github.com/rtnhnd255/ic1Test/app/internal/config"
+	"github.com/rtnhnd255/ic1Test/app/internal/db"
+	"github.com/rtnhnd255/ic1Test/app/internal/model"
 	"log"
 	"math"
 	"net"
-	"tcp_server/app/internal/config"
-	"tcp_server/app/internal/db"
-	"tcp_server/app/internal/model"
+
 )
 
 type Server struct {

@@ -1,4 +1,4 @@
-module tcp_server
+module github.com/rtnhnd255/ic1Test
 
 go 1.18
 
