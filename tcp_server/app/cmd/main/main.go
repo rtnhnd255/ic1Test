@@ -9,7 +9,7 @@ import (
 func main() {
 	var port string
 	var cfgPath string
-	flag.StringVar(&port, "port", "8080", "Specify listen port")
+	flag.StringVar(&port, "port", "20163", "Specify listen port")
 	flag.StringVar(&cfgPath, "config", "./defaultConfig.yaml", "Specify path to config file")
 	flag.Parse()
 

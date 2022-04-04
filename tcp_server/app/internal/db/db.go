@@ -46,9 +46,9 @@ func (db *Db) CreateRecord(rec model.RecordDTO) error {
 	}
 
 	res := db.Connection.QueryRow(`
-	INSERT INTO points (device_id, point_time, latitude, longitude, etc)
-	VALUES ($1, $2, $3, $4, $5)
-	`, rec.DeviceID, rec.PointTime, rec.Latitude, rec.Longitude, rec.Etc)
+	INSERT INTO points (device_id, point_time, latitude, longitude)
+	VALUES ($1, $2, $3, $4)
+	`, rec.DeviceID, rec.PointTime, rec.Latitude, rec.Longitude)
 
 	var id int
 	err = res.Scan(&id)
